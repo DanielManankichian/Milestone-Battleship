@@ -2,75 +2,68 @@
 <html>
 <head>
 <style>
-body {
-  background-color: gray;
-}
+  body {
+    background-color: gray;
+  }
+  
+  h1 {
+      font-size:50px ;
+  }
+  
+  h2 {
+      font-size:40px ;
+  }
+  
+  h1 {
+    color: red;
+  }
+  
+  h2 {
+    color: red;
+  }
+  .container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20%;
+  }
+  .button {
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: cursive;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0s;
+    cursor: pointer;
+  }
+  
+  .button1 {
+    background-color: black;
+    color: white;
+  }
+  
+  .button1:hover {
+    background-color: lightgrey;
+    color: white;
+  } 
+  </style>
 
-h1 {
-    font-size:50px ;
-}
-
-h2 {
-    font-size:40px ;
-}
-
-h1 {
-  color: red;
-}
-
-h2 {
-  color: red;
-}
-.container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20%;
-}
-.button {
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-family: cursive;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0s;
-  cursor: pointer;
-}
-
-.button1 {
-  background-color: black;
-  color: white;
-}
-
-.button1:hover {
-  background-color: lightgrey;
-  color: white;
-}
-
-.button2 {
-  background-color: black;
-  color: white;
-}
-
-.button2:hover {
-  background-color: lightgrey;
-  color: white;
-}
-
-
-</style>
 </head>
 <body>
-
 <h1 style="font-family:'Chiller Regular'"><center>Welcome to Battleship</center></h1>
 
 <h2 style="font-family: 'Chiller Regular'"><center>The game about strategy, ships, and losing friends because they think you're cheating</center></h2>
 <div class="container">
-    <button class="button button1">Play</button>
-    <button class="button button1">About</button>
+    <button onclick="myFunction('game.html')" class="button button1">Play</button>
+    <button onclick="myFunction('about.html')" class="button button1">About</button>
 </div>
+<script>
+  function myFunction(link) {
+    location.replace(link)
+  }
+  </script>
 </body>
 </html>
