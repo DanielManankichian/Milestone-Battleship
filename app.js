@@ -51,7 +51,7 @@ const carrier = new Ship('carrier', 5)
 const ships = [destroyer, submarine, cruiser, battleship, carrier]
 let notDropped
 
-function handleValidity() {
+function getValidity(allBoardBlocks, isHorizontal, startIndex, ships) {
     let validStart = isHorizontal ? startIndex <= width * width - ships.length ? startIndex :
     width * width - ships.length :
 // handle verticle
@@ -78,6 +78,7 @@ shipBlocks.every((_shipBlock, index) =>
 }
 
 const notTaken = shipBlocks.every(shipBlock => !shipBlock.classList.contains('taken'))
+return {shipBlocks, valid, notTaken}
 }
 
 function addShipPiece(user, ships, startId) {
@@ -88,6 +89,7 @@ function addShipPiece(user, ships, startId) {
 
     let startIndex = startId ? startId : randomStartIndex
     
+const {shipBlocks, valid, notTaken} = getValidity(allBoardBlocks, isHorizontal, startIndex, ships)
 
     if (valid && notTaken) {
         shipBlocks.forEach((shipBlock, index) => {
@@ -96,7 +98,7 @@ function addShipPiece(user, ships, startId) {
         
     })
     } else {
-        if (user === 'computer') addShipPiece(ships)
+        if (user === 'computer') addShipPiece(user, ships, startId)
         if (user === 'player') notDropped = true
     }
 
@@ -121,6 +123,8 @@ let draggedShip
 
   function dragOver(e) {
     e.preventDefault()
+    const ship = ships[draggedShip.id]
+    highlightArea(e.target.id, ships)
   }
 
   function dropShip(e) {
@@ -134,7 +138,16 @@ let draggedShip
 
   // Add highlights
 
-  function highlightArea(startIndex, ship) {
+  function highlightArea(startIndex, ships) {
     const allBoardBlocks = document.querySelectorAll('#player div')
     let isHorizontal = angle === 0
+
+    const {shipBlocks, valid, notTaken} = getValidity(allBoardBlocks, isHorizontal, startIndex, ships)
+
+    if (valid && notTaken) {
+        shipBlocks.forEach(shipBlock => {
+            shipBlock.classList.add('hover')
+            setTimeout(() =>  shipBlock.classList.remove('hover'), 500)
+        })
+    }
   }
