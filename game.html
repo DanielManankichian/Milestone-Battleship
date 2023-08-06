@@ -4,11 +4,48 @@
     <meta charset="UTF-8">
     <title>BattleShips!</title>
     <link rel="stylesheet" href="style.css"/>
+<style>
+    body {
+        background-color: rgb(70, 70, 70);
+    }
+
+    p {
+        color: red;
+    }
+
+    p{
+        font-size: 40px;
+    }
+
+    .button {
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: cursive;
+    font-size: 30px;
+    margin: 4px 2px;
+    transition-duration: 0s;
+    cursor: pointer;
+  }
+  
+  .button1 {
+    background-color: black;
+    color: white;
+  }
+  
+  .button1:hover {
+    background-color: lightgrey;
+    color: white;
+  } 
+</style>
 </head>    
 <body>
     <div id="game-info">
-        <p>Turn: <span id="turn-display"></span></p>
-        <p>Info: <span id="info"></span></p>
+        <p style="font-family:'Chiller Regular'">Turn: <span id="turn-display"></span></p>
+        <p style="font-family:'Chiller Regular'">Info: <span id="info"></span></p>
     </div>
     <div id="gamesboard-container"></div>
 
@@ -20,8 +57,8 @@
         <div id="4" class="carrier-preview carrier" draggable="true"></div>
     </div>
 
-    <button id="flip-button" onclick="flip()">Flip ship</button>
-    <button id="start-button">Start Game</button>
+    <button style="font-family:'Chiller Regular'" id="flip-button" onclick="flip()" class="button button1">Flip ship</button>
+    <button style="font-family:'Chiller Regular'" id="start-button" class="button button1">Start Game</button>
 
     <script src="app.js"></script>
     
