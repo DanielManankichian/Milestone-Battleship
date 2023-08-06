@@ -161,12 +161,19 @@ let draggedShip
   // Start game
 
   function startGame() {
-    if (optionContainer.children.length != 0) {
+    if (playerTurn === undefined) {if (optionContainer.children.length != 0) {
         infoDisplay.textContent = 'Place your pieces first before starting the game!'
     } else {
         const allBoardBlocks = document.querySelectorAll('#computer div')
         allBoardBlocks.forEach(block => block.addEventListener('click', handleClick))
+        playerTurn = true
+        turnDisplay.textContent = "Alright player, start the game"
+        infoDisplay.textContent = "The game has begun!"
     }
+}
+    
+
+    
   }
 
   startButton.addEventListener('click', startGame)
@@ -247,8 +254,17 @@ function checkScore(user, userHits, userSunkShips) {
         if (
             userHits.filter(storedShipName => storedShipName === shipName).length === shipLength
         ) {
-            infoDisplay.textContent = `You sunk the ${user}'s ${shipName}`
+            if (user === 'player') {
+                infoDisplay.textContent = `Good job! You sunk the computer's ${shipName}`
+                playerHits = userHits.filter(storedShipName => storedShipName !== shipName)
+            }
+            if (user === 'computer') {
+                infoDisplay.textContent = `Warning! your ${shipName} has sunk!`
+                computerHits = userHits.filter(storedShipName => storedShipName !== shipName)
+            }
+            userSunkShips.push(shipName)
         }
+
     }
 
     checkShip('destroyer', 2)
@@ -259,4 +275,13 @@ function checkScore(user, userHits, userSunkShips) {
 
     console.log('playerHits', playerHits)
     console.log('playerSunkShips', playerSunkShips)
+
+    if(playerSunkShips.length === 5) {
+        infoDisplay.textContent = 'All opponent ships have been sunk! YOU HAVE WON!!! (Restart the game by refrrshing the page and see if you can win again)'
+        gameOver = true
+    }
+    if(computerSunkShips.length === 5) {
+        infoDisplay.textContent = 'All your ships have sunk.. you lose... (Restart the game by refreshing the page and take your revenge)'
+        gameOver = true
+    }
 }
